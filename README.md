@@ -4,6 +4,7 @@
 
 # This fold provides R functions for the secondary analysis in the propose approach.
 
-# secondary_binary: works for binary secondary trait in logistic regression.
-# secondary_cts: works for continous secondary trait in linear regression.
-# secondary_qr: works for continous secondary trait in quantile regression.
+# Functions:
+  -secondary_binary: works for binary secondary trait in logistic regression.
+  -secondary_cts: works for continous secondary trait in linear regression.
+  -secondary_qr: works for continous secondary trait in quantile regression.
