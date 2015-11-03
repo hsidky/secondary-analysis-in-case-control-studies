@@ -1,7 +1,6 @@
 # README
 
-# Reference: Xiaoyu Song, Iuliana Ionita-Laza, Mengling Liu, Joan Reibman, and Ying Wei. 
-  A new estimating equation approach for secondary trait analyses in genetic case-control studies. 
+# Reference: Xiaoyu Song, Iuliana Ionita-Laza, Mengling Liu, Joan Reibman, and Ying Wei. A new estimating equation approach for secondary trait analyses in genetic case-control studies. 
 
 # This fold provides R functions for the secondary analysis in the propose approach.
 
