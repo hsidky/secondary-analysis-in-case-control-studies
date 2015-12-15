@@ -30,12 +30,12 @@
 #  dat=data.frame(cbind(x, y1, D1))						      #
 #  pd=0.1					  				      #
 #  colnames(dat)[1:2]=c("x1", "x2")		  				      #
-#  secondary_binary(y1~x1+x2, D1, dat, pd)	  				      #
-#  secondary_binary(y1~x1+x2, D1, dat, pd, boot=100)	  			      #
+#  WEE_binary(y1~x1+x2, D1, dat, pd)	  				      #
+#  WEE_binary(y1~x1+x2, D1, dat, pd, boot=100)	  			      #
 # ----------------------------------------------------------------------------------- # 
 
 
-secondary_binary <-function(formula, D, data, pd_pop, iter=10, boot=0) {
+WEE_binary <-function(formula, D, data, pd_pop, iter=10, boot=0) {
 	mf<-model.frame(formula, data=data)
 	y<-model.response(mf, "numeric")
 	namesx=all.vars(formula)[-1]
