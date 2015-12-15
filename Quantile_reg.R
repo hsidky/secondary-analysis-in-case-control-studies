@@ -9,7 +9,7 @@ library(quantreg)
 #  > library(quantreg)                  		                              #
 #                                                                                     #
 #  *function* 				  					      #			  
-#	-secondary_rq(formula, D, tau, data, pd_pop, iter=10, boot=0): obtain the     #
+#	-WEE_rq(formula, D, tau, data, pd_pop, iter=10, boot=0): obtain the     #
 #	point estimate, bootstrap SE, Wald test statistics and p-values of the        #
 #	associations between the continous secondary trait $Y$ and the variants $X$   #
 #	adjusting for the covariates under quantile regression.                       #
@@ -36,13 +36,13 @@ library(quantreg)
 #   pd=0.1                                                                            #
 #   colnames(dat)[1:2]=c("x1", "x2")                                                  #
 #  - run the proposed approach based on quantile regression                           #
-#   secondary_rq(y1~x1, D1, tau=tau=0.5, dat, pd)                                     #
-#   secondary_rq(y1~x1+x2, D1, tau=c(0.25, 0.5), dat, pd)                             #
-#   secondary_rq(y1~x1+x2, D1, tau=c(0.25, 0.5), dat, pd, boot=100)                   #
+#   WEE_rq(y1~x1, D1, tau=tau=0.5, dat, pd)                                     #
+#   WEE_rq(y1~x1+x2, D1, tau=c(0.25, 0.5), dat, pd)                             #
+#   WEE_rq(y1~x1+x2, D1, tau=c(0.25, 0.5), dat, pd, boot=100)                   #
 # ----------------------------------------------------------------------------------- # 
 
 
-secondary_rq <-function(formula, D, data, pd_pop, tau, iter=10, boot=0) {
+WEE_rq <-function(formula, D, data, pd_pop, tau, iter=10, boot=0) {
 	mf<-model.frame(formula, data=data)
 	y<-model.response(mf, "numeric")
 	namesx=all.vars(formula)[-1]
