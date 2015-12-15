@@ -1,6 +1,6 @@
 rm(list=ls())
 #
-# ---------------------------- secondary linear regression -------------------------- # 
+# ------------------------ WEE secondary linear regression -------------------------- # 
 #                                                                                     #
 #  This code serves as the WEE function to conduct secondary analysis for continuous  #
 #  secondary traits using linear regression in genetic case-control studies           #
@@ -118,7 +118,6 @@ secondary_cts<-function(formula, D, data, pd_pop,  boot=0) {
 
  	TAB    
 	}
-
 }
 
 
