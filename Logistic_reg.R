@@ -35,7 +35,28 @@
 # ----------------------------------------------------------------------------------- # 
 
 
+<<<<<<< Updated upstream
 WEE_binary <-function(formula, D, data, pd_pop, iter=10, boot=0) {
+=======
+# Example: 
+x=cbind(rbinom(3000, 2, 0.3),rbinom(3000, 2, 0.3))
+y1=rbinom(3000, 1, 0.3)
+D1=c(rep(0, 1000), rep(1, 2000))
+dat=data.frame(cbind(x, y1, D1))
+pd=0.1
+colnames(dat)[1:2]=c("x1", "x2")
+
+
+
+WEE_binary(y1~x1+x2, D1, dat, pd)
+WEE_binary(y1~x1+x2, D1, dat, pd, boot=10)
+
+
+
+
+WEE_binary <-function(formula, D, data, pd_pop, iter=10, boot=0) {
+	#formula=y1~x1+x2
+>>>>>>> Stashed changes
 	mf<-model.frame(formula, data=data)
 	y<-model.response(mf, "numeric")
 	namesx=all.vars(formula)[-1]
@@ -129,3 +150,14 @@ WEE_binary <-function(formula, D, data, pd_pop, iter=10, boot=0) {
  	TAB    
 	}
 }
+<<<<<<< Updated upstream
+=======
+
+
+
+
+
+
+
+
+>>>>>>> Stashed changes
