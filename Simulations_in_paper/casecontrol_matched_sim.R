@@ -1,3 +1,4 @@
+library(MatchIt)
 library(dplyr)
 
 set.seed(210) 
@@ -33,17 +34,30 @@ exp(cbind(OR = coef(model), confint(model)))
 result = NULL
 n.sample = 10000
 for(i in 1:100) {
+  # Randomly select cases.
   df_cases <- df %>% filter(d == TRUE) %>% sample_n(n.sample)
-  df_controls <- df %>% filter(d == FALSE) %>% sample_n(nrow(df_cases))
   
-  df_cases$weight <- sum(df$d)/n.sample
-  df_controls$weight <- (n - sum(df$d))/n.sample
+  # Exact match on x. 
+  df_controls = NULL
+  for(xi in unique(df_cases$x)){
+    n.x <- nrow(df_cases %>% filter(x == xi))
+    df.tmp <- df %>% filter(d == FALSE & x == xi) %>% sample_n(n.x)
+    df_controls <- rbind(df_controls, df.tmp)
+  }
   
+  # Combine dataframes.
   df.c <- rbind(df_cases, df_controls)
+  
+  # Assign weights. 
+  weight.table <- df.c %>% group_by(x, d) %>% count() %>% inner_join(
+                         df %>% group_by(x, d) %>% count(), by=c("x", "d")
+                       ) %>% mutate(weight = n.y/n.x) %>% dplyr::select(x, d, weight)
+  
+  df.c <- df.c %>% inner_join(weight.table, by = c("x", "d"))
 
-  unweighted <- glm(y ~ x + z, data=df.c, family=binomial)
-  weighted <- glm(y ~ x + z, data=df.c, family=quasibinomial, weights=weight)
-  result = rbind(result, cbind(coef(unweighted)[3], coef(weighted)[3]))
+  unweighted <- glm(y ~ z + x, data=df.c, family=binomial)
+  weighted <- glm(y ~ z + x, data=df.c, family=quasibinomial, weights=weight)
+  result = rbind(result, cbind(coef(unweighted)[2], coef(weighted)[2]))
 }
 
 rel.bias <- (colMeans(result) - beta[2])/beta[2]*100
